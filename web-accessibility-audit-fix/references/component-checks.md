@@ -18,10 +18,15 @@ Apply only the sections that exist in the agreed scope. The chosen compliance st
 - Give summary cards a clear structure, reading order, accessible name, and clearly named actions. Do not make a whole card clickable when it contains separate interactive controls.
 - For data tables, use table markup with an accessible name or `caption`, row groups such as `thead` and `tbody` where useful, and `th` elements with the correct row or column relationships. Do not use data-table markup for layout.
 - Give every form control a visible label connected to the control.
+- Use a real button for saving the form.
 - Connect field instructions and errors with `aria-describedby` when needed.
 - Set `aria-invalid="true"` when a field is invalid, and clear it when the field becomes valid.
 - Make validation errors specific, visible, keyboard reachable, and announced when they appear.
-- Announce save confirmations and other important updates through an appropriate live region without moving focus unnecessarily.
+- Put a save confirmation in a live region using `role="status"` or `aria-live="polite"` so a screen reader announces it.
+- Keep the confirmation available long enough to be read. Do not remove or replace it before assistive technology can announce it.
+- Keep focus on the user's current control after a successful save. Do not require the user to move focus to a toast or status message.
+- Provide visible focus styles and sufficient contrast for form controls, the save button, validation messages, and the confirmation.
+- Test that the label and error relationships work and that the save confirmation is announced without moving focus.
 
 ## Modal dialogs
 

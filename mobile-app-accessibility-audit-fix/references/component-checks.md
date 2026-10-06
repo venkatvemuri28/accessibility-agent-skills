@@ -18,9 +18,14 @@ Apply only the sections that exist in the agreed scope. The chosen compliance st
 - Give summary cards a clear reading order, accessible name, value, and actions. Keep separate card actions separately reachable.
 - For data grids or table-like views, expose row and column context when the platform supports it. Otherwise provide clear labels that preserve the same relationships.
 - Give every input a persistent visible label and the correct input purpose or type.
+- Use a native button for saving the form.
 - Connect instructions and validation errors to the affected field using the platform's accessibility APIs.
 - Expose invalid state and specific error text, and move or announce focus when needed for the user to find the error.
-- Announce save confirmations and important updates without interrupting the user unnecessarily.
+- Announce save confirmations and important updates with the platform's native polite announcement or status API without interrupting the user unnecessarily.
+- Keep the confirmation visible long enough to be read and announced. Do not remove or replace it too quickly.
+- Keep accessibility and keyboard focus on the user's current control after a successful save. Do not require the user to move focus to a toast or status message.
+- Provide visible focus styles where focus is shown and sufficient contrast for inputs, the save button, validation messages, and the confirmation.
+- Test with VoiceOver or TalkBack that labels and errors are connected and the save confirmation is announced without moving focus.
 
 ## Modal screens, sheets, and overlays
 
