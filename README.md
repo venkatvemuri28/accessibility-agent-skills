@@ -15,6 +15,7 @@ Use the web skill for mobile websites. Use the mobile skill for installed apps; 
 
 - **Choose the right target.** The skills ask which compliance standard and edition to use. For WCAG, they ask for the version and level, such as WCAG 2.2 AA. The mobile skill also asks whether to cover iOS, Android, or both.
 - **Include translation.** Both ask which languages or locales to cover. They find hardcoded user-facing and accessibility text in the selected flows. In Fix mode, they use the project's existing translation system and check the selected locales.
+- **Check full accessibility coverage.** Both skills include a broad coverage checklist for content, media, layout, focus, input, motion, forms, authentication, app or page states, translation, and complete user flows.
 - **Check common components carefully.** The web skill includes detailed checks for page structure, navigation, cards, tables, forms, modal dialogs, and tabs. The mobile skill checks the same behavior through native iOS and Android controls and accessibility APIs.
 - **Fix every confirmed issue in scope.** In Fix mode, the skills keep working until every confirmed issue required by the chosen standard in the agreed scope is fixed and rechecked. If work is blocked, the report gives the exact reason.
 - **Get a short gap report.** The report lists only the gaps found, their final status, translation gaps, and the checks that were or were not completed.
