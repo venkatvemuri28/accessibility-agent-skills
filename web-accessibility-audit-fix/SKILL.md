@@ -1,6 +1,6 @@
 ---
 name: web-accessibility-audit-fix
-description: Audit and fix web accessibility in a repository or current file changes. Ask the user which compliance standard and edition to use; for WCAG, ask for the version and level (such as WCAG 2.2 AA). Report compliance gaps and verify fixes.
+description: Audit and fix web accessibility and hardcoded user-facing text in a repository or current file changes. Ask the user for the compliance standard and supported languages at the start; for WCAG, ask for the version and level. Report gaps and verify fixes.
 ---
 
 # Web Accessibility Audit & Fix
@@ -10,9 +10,9 @@ Use the repository path the user gives. If they say "current changes" or give no
 - **Review:** Find and report issues without editing app code. Use when the user asks to audit, review, or assess.
 - **Fix:** Find issues, change code, and verify the result. Use when the user asks to fix or make the target accessible. If the request is unclear, ask which mode they want.
 
-## Choose the standard
+## Ask at the beginning
 
-Before judging compliance or changing accessibility behavior, ask the user for the **WCAG version and level** (A, AA, or AAA), for example: "Which target should I use: WCAG 2.2 AA, or another version and level?" If they name another standard, ask for its exact edition and required level or scope. Do not choose a target for them. Repository inspection can continue while waiting, but work that depends on the target must wait for their answer.
+Before reviewing or fixing, ask these questions together: **"Which accessibility compliance standard and edition should I use (for WCAG, which version and level: A, AA, or AAA)? Which languages or locales should this work support: all locales already in the project, or a specific list?"** Do not choose a standard or languages for the user. If they name another standard, ask for its exact edition and required level or scope. Repository inspection can continue while waiting, but work that depends on either answer must wait for it.
 
 Use the selected standard's official text as the source of truth. Start at https://www.w3.org/WAI/standards-guidelines/wcag/ for WCAG. Apply all criteria required at the selected level, including lower levels.
 
@@ -28,8 +28,9 @@ Use the selected standard's official text as the source of truth. Start at https
 1. Check the selected criteria against rendered behavior as well as code. Cover structure, names and text alternatives, keyboard access, focus order and visibility, forms and errors, live updates, contrast, zoom and reflow, and pointer or touch behavior where those criteria apply.
 2. Inspect real flows in a browser when available. Use keyboard-only navigation from entry to completion, check focus after dialogs and route changes, inspect labels and announcements with a screen reader when available, and test relevant zoom, viewport, and interaction states. Record when a tool or device is unavailable.
 3. Run an automated accessibility checker if available, but verify its findings and perform manual checks. A clean scan cannot prove conformance; W3C explains the limits of tools at https://www.w3.org/WAI/test-evaluate/tools/selecting/.
-4. In **Fix** mode, change the smallest sensible set of files. Prefer native HTML behavior and use ARIA only when needed. Recheck each affected flow after the fix. In **Review** mode, leave app code unchanged and give concrete repair guidance.
-5. In **Fix** mode, add or update meaningful tests for repaired behavior using the project's existing test setup. Where the project has an existing automated check or CI workflow, connect repeatable accessibility checks to it when practical. Do not add a test that only repeats the implementation or a scanner that cannot exercise the affected UI. Run the new check and document its command. If automation cannot cover a criterion, record the manual check needed on future changes.
+4. Find hardcoded user-facing and accessibility text throughout the scoped flows, including labels, instructions, placeholders, errors, status messages, notifications, tooltips, alternative text, and screen-reader announcements. In **Fix** mode, move every applicable literal into the project's existing translation system, add the selected locale entries, and preserve variable substitution and plural forms. Do not translate code identifiers or developer-only text. Where a translation needs language review, mark it as needing verification rather than claiming it is complete.
+5. In **Fix** mode, change the smallest sensible set of files. Prefer native HTML behavior and use ARIA only when needed. Recheck each affected flow and selected locale after the fix, including missing keys, longer text, reading direction, and translated screen-reader output where applicable. In **Review** mode, leave app code unchanged and give concrete repair guidance for both accessibility and translation gaps.
+6. In **Fix** mode, add or update meaningful tests for repaired behavior using the project's existing test setup. Where the project has an existing automated check or CI workflow, connect repeatable accessibility checks to it when practical. Do not add a test that only repeats the implementation or a scanner that cannot exercise the affected UI. Run the new check and document its command. If automation cannot cover a criterion, record the manual check needed on future changes.
 
 ## Compliance gap report
 
@@ -38,3 +39,5 @@ Save a plain-language Markdown report in the target repository at `reports/acces
 Lead with a **compliance gap register**, not a list of passes. For each gap, give the criterion number, affected page or state, expected and actual behavior, evidence, user impact, status (**open**, **fixed**, or **needs verification**), and the fix or next check. Separate confirmed failures from possible risks and untested criteria; an untested criterion is not a confirmed failure or a pass. If no open gap is confirmed, say so clearly.
 
 Then give the selected standard, mode, exact scope, a short verification summary, and the pages, flows, criteria, browsers, assistive tools, and device states still untested. In Fix mode, link changed files and show before-and-after behavior. In Review mode, give concrete repair guidance. Only call a behavior "verified" when it was actually tested. Do not claim full WCAG conformance from code inspection, an automated scan, or partial coverage.
+
+Add a **translation gaps** section for untranslated or hardcoded text in the scoped flows. List the affected page and text, selected locales, status, and missing translation or next check. Link a WCAG criterion only when evidence shows an actual criterion failure; hardcoded text alone is not automatically a WCAG failure. Record locale coverage and any language review still needed.
