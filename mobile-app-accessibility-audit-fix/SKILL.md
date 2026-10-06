@@ -1,6 +1,6 @@
 ---
 name: mobile-app-accessibility-audit-fix
-description: Audit and fix iOS and Android app accessibility against a user-chosen standard, including WCAG 2.2 with WCAG2ICT guidance. Use for mobile app compliance gap reports and repairs in a repository or current changes; excludes mobile websites.
+description: Audit and fix accessibility in installed iOS and Android apps. Ask the user which platforms and compliance standard and edition to use; for WCAG, ask for the version and level (such as WCAG 2.2 AA). Report compliance gaps and verify fixes. Excludes mobile websites.
 ---
 
 # Mobile App Accessibility Audit & Fix

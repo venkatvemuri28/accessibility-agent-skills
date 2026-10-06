@@ -1,6 +1,6 @@
 ---
 name: web-accessibility-audit-fix
-description: Audit and fix web accessibility against a user-chosen WCAG version and level. Use for WCAG 2.2 reviews, compliance gap reports, and accessible web repairs in a repository or current file changes.
+description: Audit and fix web accessibility in a repository or current file changes. Ask the user which compliance standard and edition to use; for WCAG, ask for the version and level (such as WCAG 2.2 AA). Report compliance gaps and verify fixes.
 ---
 
 # Web Accessibility Audit & Fix
