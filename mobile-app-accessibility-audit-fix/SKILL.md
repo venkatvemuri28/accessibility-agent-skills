@@ -1,9 +1,9 @@
 ---
-name: mobile-accessibility-remediation
-description: Review or fix accessibility in installed iOS and Android apps, including native UI built with cross-platform frameworks. Use for mobile app repositories or current app changes; do not use for mobile websites or responsive web pages.
+name: mobile-app-accessibility-audit-fix
+description: Audit and fix iOS and Android app accessibility against a user-chosen standard, including WCAG 2.2 with WCAG2ICT guidance. Use for mobile app compliance gap reports and repairs in a repository or current changes; excludes mobile websites.
 ---
 
-# Mobile app accessibility
+# Mobile App Accessibility Audit & Fix
 
 Work on the app repository path the user gives. If they say "current changes" or give no path, inspect the current repository's staged, unstaged, and untracked changes. This skill is for installed iOS and Android apps, including apps built with SwiftUI, UIKit, Jetpack Compose, Android Views, React Native, Flutter, or similar native UI frameworks. A mobile website or responsive web page belongs to a web accessibility workflow. Inspect a WebView when it is part of the app flow, including its connection to native navigation and assistive technology.
 

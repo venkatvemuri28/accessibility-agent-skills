@@ -1,9 +1,9 @@
 ---
-name: wcag-remediation
-description: Review or fix web accessibility issues in a repository or its current file changes against a user-chosen WCAG target. Use for accessibility audits, repairs, and checks that should keep future changes accessible.
+name: web-accessibility-audit-fix
+description: Audit and fix web accessibility against a user-chosen WCAG version and level. Use for WCAG 2.2 reviews, compliance gap reports, and accessible web repairs in a repository or current file changes.
 ---
 
-# WCAG remediation
+# Web Accessibility Audit & Fix
 
 Use the repository path the user gives. If they say "current changes" or give no path, use the current repository's file changes. This skill has two modes:
 
