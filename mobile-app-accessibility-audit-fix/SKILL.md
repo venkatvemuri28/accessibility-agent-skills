@@ -1,13 +1,13 @@
 ---
 name: mobile-app-accessibility-audit-fix
-description: Audit and fix accessibility and hardcoded user-facing text in installed iOS and Android apps. Ask the user for platforms, compliance standard, and supported languages at the start; for WCAG, ask for the version and level. Report gaps and verify fixes. Excludes mobile websites.
+description: Audit or fix accessibility and hardcoded user-facing text in installed iOS and Android apps. Ask for platforms, the compliance standard, and supported languages first. In Fix mode, repair every confirmed issue required by the chosen standard within the agreed scope, recheck it, and create a short report. Excludes mobile websites.
 ---
 
 # Mobile App Accessibility Audit & Fix
 
 Work on the app repository path the user gives. If they say "current changes" or give no path, inspect the current repository's staged, unstaged, and untracked changes. This skill is for installed iOS and Android apps, including apps built with SwiftUI, UIKit, Jetpack Compose, Android Views, React Native, Flutter, or similar native UI frameworks. A mobile website or responsive web page belongs to a web accessibility workflow. Inspect a WebView when it is part of the app flow, including its connection to native navigation and assistive technology.
 
-Use **Review** mode when asked to audit or assess: report issues without editing app code. Use **Fix** mode when asked to repair or make the app accessible: edit, test, and report. If the mode is unclear, ask.
+Use **Review** mode when asked to audit or assess: report issues without editing app code. Use **Fix** mode when asked to repair or make the app accessible: repair every confirmed issue required by the chosen standard within the agreed scope, test each repair, and report the final result. If the mode is unclear, ask.
 
 ## Ask at the beginning
 
@@ -28,15 +28,43 @@ Use the chosen standard's official text. For WCAG applied to native software, us
 2. Complete key flows with the platform's assistive technology: VoiceOver on iOS or TalkBack on Android. Also check switch access, voice control, external keyboard, zoom or magnification, larger text, increased contrast, and reduced motion where applicable and available. Record the device, OS version, settings, and flows actually tested.
 3. Use platform tools when available: Apple's Accessibility Inspector and accessibility tests, or Android's Accessibility Scanner and UI accessibility checks. Treat scan results as leads; manually verify behavior. If a device, simulator, tool, or test account is unavailable, state that limit rather than guessing.
 4. Find hardcoded user-facing and accessibility text throughout the scoped flows, including control labels, hints, errors, notifications, loading and empty states, text alternatives, and screen-reader announcements. In **Fix** mode, use the app's existing localized string resources for every applicable literal, add the selected locale entries, and preserve variables and plural forms. Include app-controlled permission explanations; do not treat operating-system text as app-owned. Where a translation needs language review, mark it as needing verification.
-5. In **Fix** mode, repair the smallest sensible set of files with the app framework's accessibility APIs and native controls. Recheck the affected flow in each selected locale where possible, including missing keys, longer text, reading direction, and translated screen-reader output. In **Review** mode, leave app code unchanged and give specific guidance for both accessibility and translation gaps.
+5. In **Fix** mode, repair every confirmed issue required by the chosen standard in the agreed scope. Do not stop after fixing only the easiest or highest-severity issues. Use the app framework's accessibility APIs and native controls. Recheck the affected flow in each selected locale where possible, including missing keys, longer text, reading direction, and translated screen-reader output. In **Review** mode, leave app code unchanged and give specific guidance for both accessibility and translation gaps.
 6. In **Fix** mode, add meaningful regression tests using the project's existing mobile UI test setup. Connect useful automated checks to an existing test or CI command when practical, and document the command. Keep manual checks for behavior automation cannot establish.
+7. In **Fix** mode, repeat the review, repair, and verification until no confirmed issue required by the chosen standard remains open in the agreed scope. Do not leave a known, fixable issue unresolved. If a fix or verification is blocked by missing access, an unavailable environment or device, an external dependency, or a required user decision, record the exact blocker and do not claim that the scope is complete. An untested requirement is not a pass.
 
-## Compliance gap report
+## Simple report
 
 Save a plain-language Markdown report in the target repository at `reports/accessibility/<date>-<scope>-<standard>-<mode>.md`, unless the user gives another location. Use a new name if that file exists; do not overwrite a prior report. In Review mode, the report is the only file to create or change. If the repository cannot be written, give the full report in the reply and say why it was not saved. Link the saved report in the final reply.
 
-Lead with a **compliance gap register**, not a list of passes. For each gap, give the criterion or requirement, affected platform and screen, expected and actual behavior, evidence, user impact, status (**open**, **fixed**, or **needs verification**), and the fix or next check. Separate confirmed failures from possible risks and untested requirements; an untested requirement is not a confirmed failure or a pass. If no open gap is confirmed, say so clearly.
+Keep the report short and use this structure:
 
-Then give the target standard, mode, platforms, app version or commit, screens and flows checked, a short verification summary, and devices, assistive tools, settings, screens, and requirements not tested. In Fix mode, link changed files and show before-and-after behavior. Only call behavior verified when it was actually tested; do not claim full compliance from source inspection or a clean scan.
+```markdown
+# Accessibility report
 
-Add a **translation gaps** section for untranslated or hardcoded text in the scoped flows. List the affected platform and screen, text, selected locales, status, and missing translation or next check. Link a compliance requirement only when evidence shows an actual failure; hardcoded text alone is not automatically a compliance failure. Record locale coverage and any language review still needed.
+- Target:
+- Mode:
+- Standard:
+- Platforms:
+- Scope:
+- Result: No confirmed open gaps | Open gaps remain | Blocked
+
+## Compliance gaps
+
+| Requirement | Platform and screen | Gap or fix | Status |
+| --- | --- | --- | --- |
+
+## Translation gaps
+
+| Platform and screen | Locale | Gap or fix | Status |
+| --- | --- | --- | --- |
+
+## Verification
+
+- Checked:
+- Not checked:
+- Commands:
+```
+
+List only gaps found; do not add a long list of passing requirements. Keep each row brief. Use **open**, **fixed**, **blocked**, or **needs verification** as the status. In Review mode, state the gap and the direct fix. In Fix mode, report the final state after the repair loop. If every confirmed issue required by the chosen standard in the agreed scope was fixed and rechecked, say so clearly. If any issue remains open, blocked, or unverified, mark the result as incomplete and give the exact reason.
+
+Keep translation gaps separate from confirmed compliance failures. Link a compliance requirement only when the evidence shows a failure; hardcoded text alone is not automatically a compliance failure. Only call a behavior verified when it was tested. Do not claim full compliance from source inspection, an automated scan, or partial coverage.

@@ -15,14 +15,15 @@ Use the web skill for mobile websites. Use the mobile skill for installed apps; 
 
 - **Choose the right target.** The skills ask which compliance standard and edition to use. For WCAG, they ask for the version and level, such as WCAG 2.2 AA. The mobile skill also asks whether to cover iOS, Android, or both.
 - **Include translation.** Both ask which languages or locales to cover. They find hardcoded user-facing and accessibility text in the selected flows. In Fix mode, they use the project's existing translation system and check the selected locales.
-- **Get a useful gap report.** Each finding includes the affected page or screen, expected and actual behavior, evidence, impact, status, and the next step. Translation gaps are listed separately from confirmed compliance failures.
+- **Fix every confirmed issue in scope.** In Fix mode, the skills keep working until every confirmed issue required by the chosen standard in the agreed scope is fixed and rechecked. If work is blocked, the report gives the exact reason.
+- **Get a short gap report.** The report lists only the gaps found, their final status, translation gaps, and the checks that were or were not completed.
 - **Keep claims honest.** The report names flows, devices, tools, and requirements that were not tested. A clean automated scan or partial review is not presented as full compliance.
 
 ## How to use a skill
 
 Copy the folder for the skill you need into the skill directory used by your AI assistant, or give its `SKILL.md` to an assistant that can follow reusable instructions. The files use the Agent Skills format; how a particular assistant discovers skills depends on that assistant.
 
-Ask for **Review** mode to find and report gaps without changing app code, or **Fix** mode to repair gaps, test the affected flows, and report the result. Give a repository path, or say “current changes” to focus on changed files and the flows they affect.
+Ask for **Review** mode to find and report gaps without changing app code, or **Fix** mode to repair every confirmed issue required by the chosen standard in the agreed scope, test the affected flows, and report the result. Give a repository path, or say “current changes” to focus on changed files and the flows they affect.
 
 Example requests:
 
@@ -35,6 +36,6 @@ At the start, answer the skill's questions about the standard, locales, and, for
 
 ## What you receive
 
-The skill saves a Markdown report in the target repository at `reports/accessibility/<date>-<scope>-<standard>-<mode>.md`, unless you choose another location. Review mode changes only that report. Fix mode may also change app code, translation files, and meaningful tests. Both modes record open gaps, possible risks, untested areas, and translation gaps.
+The skill saves a short Markdown report in the target repository at `reports/accessibility/<date>-<scope>-<standard>-<mode>.md`, unless you choose another location. Review mode changes only that report. Fix mode may also change app code, translation files, and meaningful tests. The report lists the gaps found, their status, translation gaps, and any checks that could not be completed.
 
 Read the linked `SKILL.md` files for the full workflow and limits.
